@@ -160,3 +160,56 @@ As specified in the project requirements, the system is built using the **MERN s
   "role": "patient | doctor | admin",
   "createdAt": "date"
 }
+Doctor
+```json
+{
+  "userId": "ref User",
+  "specialization": "string",
+  "experience": "number",
+  "availableSlots": ["array"],
+  "fees": "number"
+}
+Appointment
+```json
+{
+  "patientId": "ref User",
+  "doctorId": "ref User",
+  "date": "date",
+  "time": "string",
+  "status": "pending | confirmed | cancelled",
+  "medicalAdvice": "string"
+}
+## 7. Functional & Non-Functional Requirements
+
+### Functional Requirements
+
+1. The system shall allow users to create accounts and log in securely.
+2. Patients shall be able to view doctor profiles and available slots.
+3. The system shall allow patients to book, cancel, or reschedule appointments.
+4. Doctors shall be able to manage appointments and provide consultations.
+
+### Non-Functional Requirements
+
+- **Security:** User data and medical info must be securely protected.
+- **Performance:** The system should respond to requests within a few seconds.
+- **Usability:** The interface must be simple and user-friendly.
+- **Availability:** The platform should be accessible online with minimal downtime.
+
+---
+
+## 8. Risks and Challenges
+
+- Implementing secure authentication and data protection.
+- Coordinating development tasks between frontend and backend.
+- Managing database design for various user roles and appointment states.
+
+---
+
+## 9. Immediate Execution Plan
+
+1. **Setup:** Initialize the MERN project structure.
+2. **Database:** Configure MongoDB Atlas clusters.
+3. **Auth:** Build the login/signup API and UI.
+4. **Booking:** Implement the core appointment scheduling logic.
+5. **UI/UX:** Apply responsive styling and final polish.
+6. **Deploy:** Go live on Vercel or Render.
