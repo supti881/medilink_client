@@ -160,8 +160,7 @@ As specified in the project requirements, the system is built using the **MERN s
   "role": "patient | doctor | admin",
   "createdAt": "date"
 }
-Doctor
-```json
+
 {
   "userId": "ref User",
   "specialization": "string",
@@ -169,8 +168,7 @@ Doctor
   "availableSlots": ["array"],
   "fees": "number"
 }
-Appointment
-```json
+
 {
   "patientId": "ref User",
   "doctorId": "ref User",
@@ -179,6 +177,7 @@ Appointment
   "status": "pending | confirmed | cancelled",
   "medicalAdvice": "string"
 }
+```
 ## 7. Functional & Non-Functional Requirements
 
 ### Functional Requirements
