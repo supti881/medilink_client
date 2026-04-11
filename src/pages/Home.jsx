@@ -1,6 +1,9 @@
 // import Doctors from "../Components/Doctors";
 // import Footer from "../Components/Footer";
- import Hero from "../components/Hero";
+
+import Doctors from "../components/Doctors";
+import Footer from "../components/Footer";
+import Hero from "../components/Hero";
 import HowItWorks from "../components/HowItWorks";
 // import HowItWorks from "../Components/HowItWorks";
 import Navbar from "../components/Navbar"
@@ -17,6 +20,9 @@ const Home = () => {
       <Hero></Hero>
       < HowItWorks></HowItWorks>
       < TestimonialAndCTA></TestimonialAndCTA>
+      <Doctors></Doctors>
+      <Footer></Footer>
+      
       {/* <Hero />
       <Specialties />
       <HowItWorks />
