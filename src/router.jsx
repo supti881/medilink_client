@@ -3,6 +3,7 @@ import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
 import DashboardOverview from "./DashboardComponents/DashboardOverview";
 import Patients from "./DashboardComponents/Patients";
+import Appointments from "./DashboardComponents/Appointments";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
       {
         path: "patients",
         element: <Patients />,
+      },
+      {
+        path: "Appointments",
+        element: <Appointments />,
       },
     ],
   },
