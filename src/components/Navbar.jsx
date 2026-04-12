@@ -1,12 +1,14 @@
 import { motion } from "framer-motion";
+import { NavLink } from "react-router-dom";
 
 function Navbar() {
-  const navLinks = [
-    { name: "Home", href: "#", active: true },
-    { name: "Doctors", href: "#" },
-    { name: "Services", href: "#" },
-    { name: "About", href: "#" },
-  ];
+ const navLinks = [
+  { name: "Home", href: "/", active: true },
+  { name: "Doctors", href: "/doctors" },   // Changed to lowercase
+  { name: "Services", href: "/services" }, // Changed to lowercase
+  { name: "About", href: "/about" },       // Matches your AboutPage route
+  { name: "Dashboard", href: "/Dashboard" }, 
+];
 
   return (
     <nav className="sticky top-0 z-[100] w-full border-b border-white/5 bg-base-300/60 backdrop-blur-2xl">
@@ -31,26 +33,32 @@ function Navbar() {
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center bg-white/5 border border-white/5 rounded-full px-2 py-1.5 shadow-inner">
-          {navLinks.map((link) => (
-            <a
-              key={link.name}
-              href={link.href}
-              className={`relative px-6 py-2 text-sm font-medium transition-all duration-300 rounded-full ${
-                link.active 
-                ? "text-white" 
-                : "text-base-content/60 hover:text-base-content hover:bg-white/5"
-              }`}
-            >
-              {link.active && (
-                <motion.div 
+         {navLinks.map((link) => (
+        <NavLink
+          key={link.name}
+          to={link.href}
+          className={({ isActive }) =>
+            `relative px-6 py-2 text-sm font-bold transition-all duration-300 rounded-full z-10 ${
+              isActive 
+                ? "text-[#032d1d]" 
+                : "text-[#7a8a83] hover:text-[#032d1d] hover:bg-white/50"
+            }`
+          }
+        >
+          {({ isActive }) => (
+            <>
+              {isActive && (
+                <motion.div
                   layoutId="activeNav"
-                  className="absolute inset-0 bg-emerald-500/20 border border-emerald-500/20 rounded-full -z-10"
-                  transition={{ type: "spring", duration: 0.6 }}
+                  className="absolute inset-0 bg-[#c6e7d1] border border-[#b5dbbf] rounded-full -z-10 shadow-sm"
+                  transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                 />
               )}
               {link.name}
-            </a>
-          ))}
+            </>
+          )}
+        </NavLink>
+      ))}
         </div>
 
         {/* Auth Actions */}
