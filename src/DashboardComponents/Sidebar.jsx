@@ -14,7 +14,7 @@ const Sidebar = () => {
   const [activeItem, setActiveItem] = useState('Dashboard');
 
  const menuItems = [
-  { name: 'Dashboard', icon: LayoutGrid, href: "/Dashboard/DashboardOverview" },
+  { name: 'Dashboard', icon: LayoutGrid, href: "/Dashboard" },
   { name: 'Patients', icon: Users, href: "/Dashboard/Patients" },
   { name: 'Appointments', icon: Calendar, href: "/Dashboard/Appointments" },
   { name: 'Messages', icon: MessageSquare, href: "/Dashboard/Messages" },
