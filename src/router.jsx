@@ -9,29 +9,32 @@ import DoctorsPage from "./pages/DoctorPage";
 import AboutPage from "./pages/About";
 import ServicesPage from "./pages/ServicesPage";
 import Homelayout from "./Layout/HomeLayout";
+import AuthLayout from "./Layout/auth/AuthLayout";
+import SignUp from "./Layout/auth/authComponents/SignUp";
+import Login from "./Layout/auth/authComponents/Login";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Homelayout />,
     children: [
-       {
+      {
         path: "/",
-        element: <Home />
+        element: <Home />,
       },
       {
         path: "doctors",
-        element: <DoctorsPage />
+        element: <DoctorsPage />,
       },
-       {
+      {
         path: "about",
-        element: <AboutPage />
+        element: <AboutPage />,
       },
-       {
+      {
         path: "services",
-        element: <ServicesPage />
-      }
-    ]
+        element: <ServicesPage />,
+      },
+    ],
   },
   {
     path: "/dashboard",
@@ -51,7 +54,21 @@ const router = createBrowserRouter([
       },
       {
         path: "Analytics",
-        element: <Analytics />
+        element: <Analytics />,
+      },
+    ],
+  },
+  {
+    path: "auth",
+    element: <AuthLayout></AuthLayout>,
+    children: [
+      {
+        path: "signup",
+        element: <SignUp></SignUp>,
+      },
+      {
+        path: "login",
+        element: <Login></Login>,
       },
     ],
   },
