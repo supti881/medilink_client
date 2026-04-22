@@ -56,6 +56,18 @@ const router = createBrowserRouter([
         path: "Analytics",
         element: <Analytics />,
       },
+      {
+        path: "A",
+        element: <Analytics />,
+      },
+      {
+        path: "Analytics",
+        element: <Analytics />,
+      },
+      {
+        path: "Analytics",
+        element: <Analytics />,
+      },
     ],
   },
 
