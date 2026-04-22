@@ -1,5 +1,7 @@
 import { motion } from "framer-motion";
+import { useContext } from "react";
 import { NavLink } from "react-router-dom";
+import { AuthContext } from "../AuthContext/AuthContext";
 
 function Navbar() {
   const navLinks = [
@@ -9,6 +11,8 @@ function Navbar() {
     { name: "About", href: "/about" }, // Matches your AboutPage route
     { name: "Dashboard", href: "/Dashboard" },
   ];
+
+  const {user}=useContext(AuthContext);
 
   return (
     <nav className="sticky top-0 z-[100] w-full border-b border-white/5 bg-base-300/60 backdrop-blur-2xl">

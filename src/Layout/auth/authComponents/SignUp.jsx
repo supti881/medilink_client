@@ -9,16 +9,12 @@ import {
   Calendar,
   ArrowRight,
   Camera,
-  User2,
-  MailPlus,
-  PhoneCall,
-  LockIcon,
-  Calendar1,
 } from "lucide-react";
 import { AuthContext } from "../../../AuthContext/AuthContext";
 
 const SignUp = () => {
-  const { SignUpWithEmailPassword, UpdateUser } = useContext(AuthContext);
+  const { SignUpWithEmailPassword, UpdateUser, user } = useContext(AuthContext);
+  console.log("Current User in SignUp:", user);
   // 1. Unified State
   const [formData, setFormData] = useState({
     name: "",
@@ -54,10 +50,27 @@ const SignUp = () => {
       formData.email,
       formData.password,
     );
+    console.log("firebase response", res);
+    const User = res?.user;
+
     await UpdateUser({
       displayName: formData.name,
       photoURL: formData.photo ? URL.createObjectURL(formData.photo) : null,
     });
+    //  console.log("firebase update response", updateRes)
+
+    await fetch("http://localhost:5000/api/users/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: User.displayName || "No Name",
+        email: User.email,
+        role: "patient",
+      }),
+    });
+
     console.log(res);
   };
 
@@ -114,7 +127,7 @@ const SignUp = () => {
               <CustomInput
                 label="Full Name"
                 name="name"
-                icon={User2}
+                icon={User}
                 placeholder="John Doe"
                 value={formData.name}
                 onChange={handleChange}
@@ -123,7 +136,7 @@ const SignUp = () => {
                 label="Email"
                 name="email"
                 type="email"
-                icon={MailPlus}
+                icon={Mail}
                 placeholder="john@example.com"
                 value={formData.email}
                 onChange={handleChange}
@@ -132,7 +145,7 @@ const SignUp = () => {
                 label="Phone"
                 name="phone"
                 type="tel"
-                icon={PhoneCall}
+                icon={Phone}
                 placeholder="+1 234..."
                 value={formData.phone}
                 onChange={handleChange}
@@ -141,7 +154,7 @@ const SignUp = () => {
                 label="Password"
                 name="password"
                 type="password"
-                icon={LockIcon}
+                icon={Lock}
                 placeholder="••••••••"
                 value={formData.password}
                 onChange={handleChange}
@@ -152,7 +165,7 @@ const SignUp = () => {
                 label="Age"
                 name="age"
                 type="number"
-                icon={Calendar1}
+                icon={Calendar}
                 placeholder="25"
                 value={formData.age}
                 onChange={handleChange}
@@ -204,7 +217,7 @@ const SignUp = () => {
 };
 
 // Reusable Helper Component
-const CustomInput = ({ label, icon: Icon, ...props }) => (
+const CustomInput = ({ label, ...props }) => (
   <div className="flex flex-col gap-2">
     <label className="text-xs font-bold text-slate-400 uppercase ml-1 tracking-wide">
       {label}

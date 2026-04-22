@@ -6,19 +6,21 @@ import {
   signOut,
   updateProfile,
 } from "firebase/auth";
+// import axios from "axios";
 import { useEffect, useState } from "react";
 import auth from "../firebase.config";
 
 import { AuthContext } from "./AuthContext";
-// import axios from "axios";
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState([]);
+  const [role, setRole] = useState(null);
   const [loading, setLoading] = useState(true);
   // const [roleLoading, setRoleLoading] = useState(true);
   // const [role, setRole] = useState("");
   // const [userStatus, setUserStatus] = useState("");
   console.log(user);
+  console.log("user role in auth provider", role);
 
   const SignUpWithEmailPassword = (email, password) => {
     setLoading(true);
@@ -50,17 +52,25 @@ const AuthProvider = ({ children }) => {
   // }, [user, role]);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (CurrentUser) => {
-      console.log(CurrentUser);
-      setUser(CurrentUser.providerData[0]);
-
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
       setLoading(false);
     });
 
-    return () => {
-      unsubscribe();
-    };
-  }, [user?.email]);
+    return () => unsubscribe();
+  }, []); // ✅ EMPTY
+
+  // ✅ Fetch role
+  useEffect(() => {
+    if (user?.email) {
+      fetch(`http://localhost:5000/api/users/${user.email}`)
+        .then((res) => res.json())
+        .then((data) => {
+          setRole(data.role);
+        })
+        .catch((err) => console.error(err));
+    }
+  }, [user]);
 
   const SignOut = () => {
     return signOut(auth);
@@ -73,7 +83,7 @@ const AuthProvider = ({ children }) => {
     UpdateUser,
     loading,
     user,
-    // role,
+    role,
     // roleLoading,
     // userStatus
   };
